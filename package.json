@@ -6,8 +6,7 @@
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p --composite false"
+
   },
   "dependencies": {
     "vue": "^3.3.4"
