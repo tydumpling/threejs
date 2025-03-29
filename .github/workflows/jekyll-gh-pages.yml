@@ -1,0 +1,36 @@
+name: Deploy Dist to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # 如果你的主分支是 'master'，请改为 'master'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 步骤 1: 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 步骤 2: 设置 Node.js 环境（根据需要调整 Node.js 版本）
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # 替换为你项目所需的 Node.js 版本
+
+      # 步骤 3: 安装依赖（如果你的项目有依赖的话）
+      - name: Install dependencies
+        run: npm install  # 如果使用 Yarn，可以改为 `yarn install`
+
+      # 步骤 4: 构建项目（根据你的构建命令调整）
+      - name: Build project
+        run: npm run build  # 如果使用 Yarn，可以改为 `yarn build`
+
+      # 步骤 5: 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
