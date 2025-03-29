@@ -5,6 +5,9 @@ on:
     branches:
       - main  # 如果你的默认分支是 main
 
+permissions:
+  contents: write  # 显式声明写入权限
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -27,6 +30,10 @@ jobs:
       # 构建项目
       - name: Build project
         run: npm run build
+
+      # 删除 yarn.lock（如果需要）
+      - name: Remove yarn.lock
+        run: rm -f yarn.lock
 
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
