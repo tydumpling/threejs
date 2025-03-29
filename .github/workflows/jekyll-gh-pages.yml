@@ -1,22 +1,31 @@
-name: Deploy Static Site to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # 如果你的主分支是 'master'，请改为 'master'
+      - main  # 如果你的主分支是 main，否则改为 master
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 步骤 1: 检出代码
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 步骤 2: 部署 dist 文件夹到 GitHub Pages
+      - name: Set up Node.js (如果需要构建)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # 根据你的项目需求选择合适的 Node.js 版本
+
+      - name: Install dependencies (如果需要构建)
+        run: npm install  # 如果你的项目需要安装依赖
+
+      - name: Build project (如果需要构建)
+        run: npm run build  # 如果你的项目需要构建
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./dist  # 指定 dist 文件夹为发布目录
