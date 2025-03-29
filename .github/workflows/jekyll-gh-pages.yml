@@ -12,18 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Set up Node.js (如果需要构建)
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'  # 根据你的项目需求选择合适的 Node.js 版本
-
-      - name: Install dependencies (如果需要构建)
-        run: npm install  # 如果你的项目需要安装依赖
-
-      - name: Build project (如果需要构建)
-        run: npm run build  # 如果你的项目需要构建
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
