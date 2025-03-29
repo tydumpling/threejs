@@ -22,15 +22,19 @@ jobs:
 
       # 安装依赖
       - name: Install dependencies
-        run: npm install
+        run: yarn install --frozen-lockfile
 
       # 构建项目
       - name: Build project
-        run: npm run build
+        run: yarn build
+
+      # 检查 dist 目录内容
+      - name: Check dist directory
+        run: ls -la dist
 
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub 会自动提供这个 token
-          publish_dir: ./dist  # Vite 默认的构建输出目录
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
