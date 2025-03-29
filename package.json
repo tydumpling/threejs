@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
-
+    "preview": "vite preview"
   },
   "dependencies": {
     "vue": "^3.3.4"
