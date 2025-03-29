@@ -3,10 +3,10 @@ name: Deploy Static Site to GitHub Pages
 on:
   push:
     branches:
-      - main  # 如果您的默认分支是 'master'，请改为 'master'
+      - main  # 如果你的主分支是 'master'，请改为 'master'
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,26 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 步骤 2: 设置 Git 用户信息
-      - name: Configure Git User
-        run: |
-          git config --global user.name "tydumpling"
-          git config --global user.email "tydumpling@users.noreply.github.com"
-
-      # 步骤 3: 安装必要的依赖（根据需要调整）
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'  # 根据您的项目需求调整 Node.js 版本
-
-      - name: Install dependencies
-        run: npm install
-
-      # 步骤 4: 构建项目
-      - name: Build project
-        run: npm run build
-
-      # 步骤 5: 部署到 GitHub Pages
+      # 步骤 2: 部署 dist 文件夹到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
